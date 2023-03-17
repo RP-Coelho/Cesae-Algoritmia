@@ -7,8 +7,8 @@ public class Ex12 {
         Scanner input = new Scanner(System.in);
 //. Escreva um programa que leia uma sequência de números inteiros do utilizador e determine se a sequência
 //está em ordem crescente.
-        int it = 0, valor1 = 0, valor2 = 1, count = 0;
-
+        int it = 0, valor1 = 0, valor2 = 1;
+        boolean crescente = true;
         System.out.println("Diga-me um valor:");
         int v1 = input.nextInt();
 
@@ -19,13 +19,13 @@ public class Ex12 {
             if (v1 <= v2) {
 
             } else {
-                count++;
+                crescente = false;
             }
             v1 = v2;
             it++;
 
         }
-        if (count == 0) {
+        if (crescente == true) {
             System.out.println("Esta Crescente");
         } else {
             System.out.println("Erro nao esta!");
