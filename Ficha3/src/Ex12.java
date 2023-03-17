@@ -17,10 +17,11 @@ public class Ex12 {
             int v2 = input.nextInt();
 
             if (v1 <= v2) {
-                v1 = v2;
+
             } else {
                 count++;
             }
+            v1 = v2;
             it++;
 
         }
