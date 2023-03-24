@@ -9,6 +9,7 @@ public class Ex3 {
         int[] vector = new int[10];
         int x,i=0;
         for (x=0;x<10;x++){
+            i=vector[x];
             System.out.println("Diga-me um numero");
             vector[x] = input.nextInt();
 
