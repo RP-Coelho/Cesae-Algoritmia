@@ -8,7 +8,7 @@ public class Ex7 {
 //inserido. Caso não exista, deverá informar o utilizador.
 
         int[] n = new int[10];
-        int x, i = 0;
+        int x, i = n[0];
         boolean c =true;
 
         for (x = 0; x < 10; x++) {

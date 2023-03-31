@@ -17,7 +17,7 @@ public class Ex3 {
         System.out.println("Diga-me um valor de 0 a 100");
         n2 = input.nextInt();
 
-        if (n1 < 0) {
+        if (n1 < 0 || n1>100) {
 
             System.out.println("Erro numero invalido");
         } else if (n1 == n2) {

@@ -13,7 +13,7 @@ public class Ex2 {
 
         do {
             do {
-                System.out.println("1. Criar");
+                System.out.println("\n\n1. Criar");
                 System.out.println("2. Atualizar");
                 System.out.println("3. Eliminar");
                 System.out.println("4. Sair");
@@ -26,7 +26,7 @@ public class Ex2 {
                 }
             } while (opcao < 1 || opcao > 4);
 
-            switch (opcao) {
+            switch (opcao)  {
                 case 1:
                     System.out.println("Escolheu - Criar");
                     break;
@@ -39,10 +39,9 @@ public class Ex2 {
                 case 4:
                     break;
                 default:
-                    System.out.println("Erro, opção invalida");
+                    System.out.println("Erro, opção invalida ");
             }
-            System.out.println("");
-            System.out.println("");
+
 
 
         } while (opcao != 4);

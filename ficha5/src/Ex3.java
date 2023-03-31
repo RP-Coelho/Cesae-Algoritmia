@@ -8,8 +8,13 @@ public class Ex3 {
 //        Escreva um programa que lê um array de tamanho 10 e encontra o maior elemento
         int[] vector = new int[10];
         int x,i=0;
-        for (x=0;x<10;x++){
-            i=vector[x];
+
+        System.out.println("Diga-me um numero");
+        vector[0] = input.nextInt();
+        i=vector[0];
+
+        for (x=1;x<10;x++){
+
             System.out.println("Diga-me um numero");
             vector[x] = input.nextInt();
 

@@ -27,72 +27,61 @@ public class Ex15 {
             } while (!rsp.equals("N"));
 
             do {
-                do {
-                    System.out.println("Qual o seu codigo de Funcionario");
-                    id = input.nextInt();
-                    System.out.println("Deseja refazer?");
-                    rsp = input.next();
+                System.out.println("Qual o seu codigo de Funcionario");
+                id = input.nextInt();
+                System.out.println("Deseja refazer?");
+                rsp = input.next();
 
-                } while (!rsp.equals("N"));
-                System.out.println("Deseja Prosseguir?");
-                rsp = input.next();
-            } while (!rsp.equals("S"));
+            } while (!rsp.equals("N"));// So deixa avançar se for valido!
+
+
             do {
-                do {
-                    System.out.println("Qual o seu nome de Funcionario");
-                    nome = input.next();
+                System.out.println("Qual o seu nome de Funcionario");
+                nome = input.next();
+                System.out.println("Deseja refazer?");
+                rsp = input.next();
+            } while (!rsp.equals("N"));
+
+            do {
+                System.out.println("Qual o seu cargo de Funcionario");
+                cargo = input.next();
+                if (cargo.equals("C") || cargo.equals("E") || cargo.equals("A")) {
+                    System.out.println("Deseja Refazer?");
+                    rsp = input.next();
+                } else {
+                    System.out.println("Cargo Invalido! Tente de novo!");
+                    rsp = "S";
+                }
+
+            } while (!rsp.equals("N")); // So deixa avançar se for valido!
+
+
+            do {
+                System.out.println("Quantos meses trabalhou");
+                x = input.nextInt();
+                if (x < 0 || x > 13) {
+                    System.out.println("Erro repita! de novo!");
+                    rsp = "S";
+                } else {
                     System.out.println("Deseja refazer?");
                     rsp = input.next();
-                } while (!rsp.equals("N"));
-                System.out.println("Deseja Prosseguir?");
-                rsp = input.next();
-            } while (!rsp.equals("S"));
+                }
+
+            } while (!rsp.equals("N"));
+
             do {
-                do {
-                    System.out.println("Qual o seu cargo de Funcionario");
-                    cargo = input.next();
-                    if(cargo.equals("C")||cargo.equals("E")||cargo.equals("A")) {
-                        System.out.println("Deseja refazer?");
-                        rsp = input.next();
-                    }else{
-                        System.out.println("Cargo Invalido! Tente de novo!");
-                        rsp="S";
+                for (i = 0; i < x; i++) {
+                    System.out.println("Quantos dias trabalhou no mes " + (i + 1));
+                    y[i] = input.nextInt();
+                    if (y[i] > 31 || y[i] < 0) {
+                        System.out.println("Numero dias errado");
+                        i = i - 1;
                     }
-                } while (!rsp.equals("N"));
-                System.out.println("Deseja Prosseguir?");
+                }
+                System.out.println("Deseja refazer?");
                 rsp = input.next();
-            } while (!rsp.equals("S"));
-            do {
-                do {
-                    System.out.println("Quantos meses trabalhou");
-                    x = input.nextInt();
-                    if (x < 0 && x < 13) {
-                        System.out.println("Erro repita! de novo!");
-                        rsp = "S";
-                    } else {
-                        System.out.println("Deseja refazer?");
-                        rsp = input.next();
-                    }
-                } while (!rsp.equals("N"));
-                System.out.println("Deseja Prosseguir?");
-                rsp = input.next();
-            } while (!rsp.equals("S"));
-            do {
-                do {
-                    for (i = 0; i < x; i++) {
-                        System.out.println("Quantos dias trabalhou no mes " + (i+1));
-                        y[i] = input.nextInt();
-                        if (y[i] > 31 || y[i] < 0) {
-                            System.out.println("Numero dias errado");
-                            i = i - 1;
-                        }
-                    }
-                    System.out.println("Deseja refazer?");
-                    rsp = input.next();
-                } while (!rsp.equals("N"));
-                System.out.println("Deseja Prosseguir?");
-                rsp = input.next();
-            } while (!rsp.equals("S"));
+            } while (!rsp.equals("N"));
+
             switch (cargo) {
                 case "E":
                     for (i = 0; i < x; i++) {
@@ -193,15 +182,14 @@ public class Ex15 {
 
             }
             for (i = 0; i < x; i++) {
-                System.out.println("O valor liquido mensal dos funcionarios foi no mes " + i + "de " + vl[i]+"€");
-                System.out.println("O valor pago total mensal dos funcionarios foi no mes " + i + "de " + sst[i]+"€");
+                System.out.println("O valor liquido mensal dos funcionarios foi no mes " + i + " de " + vl[i] + "€");
+                System.out.println("O valor pago total mensal dos funcionarios foi no mes " + i + " de " + sst[i] + "€");
             }
-            System.out.println("");
-            System.out.println("");
-            System.out.println("O valor liquido total do funcionario foi  " + vlt+"€");
-            System.out.println("O valor liquido total do funcionario foi  " + encargost+"€");
-            System.out.println("");
-            System.out.println("");
+
+            System.out.println("\n\nO valor liquido total do funcionario foi  " + vlt + "€");
+            System.out.println("O valor liquido total do funcionario foi  " + encargost + "€\n\n");
+
+
             System.out.println("Deseja calcula outra função?");
             rsp = input.next();
         } while (!rsp.equals("S"));
