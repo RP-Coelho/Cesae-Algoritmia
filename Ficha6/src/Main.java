@@ -390,11 +390,12 @@ Introduza o número de colunas: 6
         return ex13;
     }
 
-    public static/* Ler uma letra numa string e somar */ String[][] ex15(){
+  /*  public static/* Ler uma letra numa string e somar  String[][] ex15(){
     String palavra=ex02();
 
 
     }
+    */
 
     /* 5. Escreva uma função que recebe uma string como parâmetro e retorna o número de ocorrências da letra 'a'
 (minúscula) na string*/
