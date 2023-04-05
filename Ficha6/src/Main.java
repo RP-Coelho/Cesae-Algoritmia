@@ -186,6 +186,7 @@ desenvolvidas nos exercícios 1 a 3 (ou 4), devendo o número ser escolhido ante
                 System.out.println("11 - Desenhar um quadrado");
                 System.out.println("12 - Soma de matrizes");
                 System.out.println("13 - Somatorio total de matrizes");
+                System.out.println("14 - Ler quantidade de caracteres");
                 System.out.println("15 - Sair do Programa");
                 System.out.println("\n");
                 System.out.println("Que opção deseja");
@@ -235,6 +236,9 @@ desenvolvidas nos exercícios 1 a 3 (ou 4), devendo o número ser escolhido ante
                     break;
                 case 13:
                     ex15(ex14());
+                    break;
+                case 14:
+                    ex16();
                     break;
             }
 
@@ -390,17 +394,8 @@ Introduza o número de colunas: 6
         return ex13;
     }
 
-  /*  public static/* Ler uma letra numa string e somar  String[][] ex15(){
-    String palavra=ex02();
 
-
-    }
-    */
-
-    /* 5. Escreva uma função que recebe uma string como parâmetro e retorna o número de ocorrências da letra 'a'
-(minúscula) na string*/
-
-    public static/* Somar numero  matriz */ int[][] ex14() {
+    public static/* juntar matriz */ int[][] ex14() {
     /*Implemente funções que, dadas 2 matrizes de inteiros com a mesma dimensão bem como a sua dimensão,
 apresente (numa função) em forma de matriz o resultado da soma das 2 matrizes e (noutra função) o somatório
 dos seus elementos*/
@@ -439,9 +434,40 @@ dos seus elementos*/
 
     }
 
+    public static /* Ler numero caracter */ int ex16() {
+
+        Scanner input = new Scanner(System.in);
+        int soma = 0;
+
+        String palavra = ex02();
+
+        System.out.println("Qual a letra a ler");
+        String letra = ex02();
+
+        for (int i = 0; i < palavra.length(); i++) {
+
+            if (palavra.charAt(i) == (letra.charAt(0))) {
+                soma++;
+            }
+
+        }
+
+        System.out.println("O numero da letra " + letra + " que aparece na palavra" + palavra + " é de " + soma);
+
+        return soma;
+    }
+
+
+
+
+/* 15. Escreva uma função que recebe uma string como parâmetro e retorna o número de ocorrências da letra 'a'
+(minúscula) na string*/
+
+
     public static /* Main */ void main(String[] args) {
 
         ex5();
+
 
     }
 }
