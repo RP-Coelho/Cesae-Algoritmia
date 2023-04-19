@@ -7,9 +7,9 @@ public class Ex12 {
 
         Scanner input = new Scanner(System.in);
 
-        //Faça um programa que preencha cada posição de uma matriz (3x3 elementos inteiros) com um valor introduzido
+        /*Faça um programa que preencha cada posição de uma matriz (3x3 elementos inteiros) com um valor introduzido
         //pelo utilizador. Deverá indicar qual o maior e qual o menor dos valores guardados na matriz, e deverá imprimir
-        ////todo o conteúdo da matriz de forma semelhante ao exercício 9.
+        ////todo o conteúdo da matriz de forma semelhante ao exercício 9.*/
 
         int[][] mat = new int[3][3];
         int x, y = 0, menor, maior;

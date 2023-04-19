@@ -25,6 +25,13 @@ public class Ex14 {
 
             }
         }
+
+        /* opcao que correria menos codigo e optimizaria faz meno iterações sem condições*/
+
+        for(int i=0;i<4;i++){
+            soma+=m[i][i];
+        }
+
         System.out.println("A soma é " + soma);
     }
 }
