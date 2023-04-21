@@ -30,7 +30,11 @@ public class Ex3 {
 
         System.out.println("Diga-me o valor");
         int num = input.nextInt();
-
+if (EPrimo(num)){
+    System.out.println("É Primo");
+}else{
+    System.out.println("Não é Primo");
+}
 
     }
 
