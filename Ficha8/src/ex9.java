@@ -13,11 +13,12 @@ frequentes no ficheiro*/
         int count = 0;
         while (file.hasNextLine()) {
             palavra += file.nextLine();
+
         }
         System.out.println(palavra);
 
         String[] npalavra = palavra.split("\\.|,|\\s+");
-        System.out.println(npalavra.length + "array ofb??");
+
         int[] contagem = new int[npalavra.length];
         String[][] somapalavras = new String[npalavra.length][2];
 
@@ -54,7 +55,7 @@ frequentes no ficheiro*/
             }
         }
 
-        for (int i = 0; i < (npalavra.length - 1); i++) {
+       /* for (int i = 0; i < (npalavra.length - 1); i++) {
             for (int z = i + 1; z < npalavra.length; z++) {
                 if (contagem[z] > contagem[i]) {
                     //Trocar as palavras de ordem
@@ -68,7 +69,7 @@ frequentes no ficheiro*/
 
 
                     // Trocar a contagem de ordem
-                    int tempn = Integer.parseInt(somapalavras[i][1]);
+                  /*  int tempn = Integer.parseInt(somapalavras[i][1]);
                     somapalavras[i][1] = somapalavras[z][1];
                     somapalavras[z][1] = temp;
 
@@ -77,9 +78,6 @@ frequentes no ficheiro*/
                     contagem[z] = tempn;*/
 
 
-                }
-            }
-        }
         for (int i = 0; i < 10; i++) {
             for (int z = 0; z <10; z++) {
             //    System.out.println(somapalavras[i][0] + " e " + somapalavras[i][1]);
