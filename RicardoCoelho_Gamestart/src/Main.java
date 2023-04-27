@@ -1,7 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -27,15 +25,14 @@ ser uma função própria (objeto de valorização)).
         do {
 
             do {
-                System.out.println("Bem vindo à GameStart");
-                System.out.println("Por favor seleccione uma das seguintes opções");
+                System.out.println("\nBem vindo à GameStart");
+                System.out.println("Por favor seleccione uma das seguintes opções\n");
                 System.out.println("1 - Imprima o seu conteúdo na consola.");
                 System.out.println("2 - Imprima quantas vendas foram executadas e o seu valor total.");
                 System.out.println("3 - Sabendo que a GameStart tem 10% de lucro em cada jogo, calcule o total de lucro.");
-                System.out.println("4 - Dado um idCliente, imprima todas as informações associadas a esse cliente (nome, contacto, email).");
-                System.out.println("5 - Dada uma Editora, imprima todos géneros e os respetivos jogos");
-                System.out.println("6 - Imprima qual o jogo mais caro e os clientes que o compraram ");
-                System.out.println("7 - Sair do Programa");
+                System.out.println("4 - Filtre e imprima todas as informações associadas.");
+                System.out.println("5 - Imprima qual o jogo mais caro e os clientes que o compraram ");
+                System.out.println("6 - Sair do Programa");
                 System.out.println("-----------------------------------------------------------------------------------");
                 System.out.println("Qual a opção escolhida");
                 opcao = sc.nextInt();
@@ -43,81 +40,97 @@ ser uma função própria (objeto de valorização)).
             } while (opcao < 1 || opcao > 7);
             switch (opcao) {
                 case 1:
-                    imprimir();
+                    imprimir(); // função basica de impressão de ficheiros
                     break;
                 case 2:
-                    System.out.print("O numero de vendas efectuado é " + (lerDados(linhas()).length - 1) + " e o total arrecadado é ");
-                    System.out.printf("%.2f", totalVendas(lerDados(linhas())));
-                    System.out.println("€");
+                    System.out.print("\nO numero de vendas efectuado é " + (lerDados(linhas()).length - 1) + " e o total arrecadado é "); // Uso a função de ler a matriz, coloco o numero de length e retiro a linha de cabeçalho e será sempre o numero de vendas maximo
+                    System.out.printf("%.2f", totalVendas(lerDados(linhas()))); // função que le a matriz anterior e calcula a soma das vendas
+                    System.out.println("€ \n");
                     break;
                 case 3:
                     lucro = 0.1;
-                    System.out.print("O lucro da GameStart ao longo das " + (lerDados(linhas()).length - 1) + " é de ");
-                    System.out.printf("%.2f", totalVendas(lerDados(linhas())) * lucro);
-                    System.out.println("€");
+                    System.out.print("\nO lucro da GameStart ao longo das " + (lerDados(linhas()).length - 1) + " é de ");
+                    System.out.printf("%.2f", totalVendas(lerDados(linhas())) * lucro);//pego já no valor anterior e apenas multiplico pelo mesmo exercicio anterior
+                    System.out.println("€ \n");
                     break;
-                case 4:
-                    subopcao = menuPesquisa();
+                case 4: // Quis complicar um pouco o pensamento e usar uma forma de filtrar com mais criterios.
+                    subopcao = menuPesquisa(); // vai buscar umuma opção para aplicar neste novo switch, podia ter colocado tudo na função "menuPesquisa" que seria talvez mais readable e apenas colocava aqui uma condição adicional com o valor "final" que a função corresse caso fosse para voltar ao menu anterior
                     switch (subopcao) {
                         case 1:
 
-                            System.out.println("Diga-me um IdCliente para apresentar informações");
-                            valor = sc.next();
-                            procura = 1;
-                            imp = "2;3;4";
+                            System.out.println("\n Diga-me um IdCliente para apresentar informações\n");
+                            valor = sc.next(); // input de cliente
+                            procura = 1; // em que coluna estou a buscar esta informação // caso haja mudanças na ordem de colunas, conseguimos ja com uma simples pesquisa previa passar esse novo valor como parametro
+                            imp = "2;3;4"; // colunas a imprimir, podemos adicionar ou remover ou mesmo passar essa pergunta para o utilizador
                             imprimirUnico(distinctArray(lerDados(linhas()), procura), procura, valor, imp);
 
                             break;
                         case 2:
 
-                            System.out.println("Diga-me o Nome do Cliente para apresentar informações");
+                            System.out.println("\nDiga-me o Nome do Cliente para apresentar informações\n");
                             valor = sc.nextLine();
                             valor = sc.nextLine();
                             imp = "0;5;6;7;8";
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura=7), procura=2, valor, imp);
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 2, valor, imp);
 
                             break;
                         case 3:
 
-                            System.out.println("Diga-me o Nome da editora para apresentar informações");
+                            System.out.println("\nDiga-me o Nome da editora para apresentar informações\n");
                             valor = sc.nextLine();
                             valor = sc.nextLine();
                             imp = "5;6;7";
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura=7), procura=5, valor, imp);
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 5, valor, imp);
 
                             break;
                         case 4:
-                            System.out.println("Diga-me o Nome da categoria para apresentar informações");
+                            System.out.println("\nDiga-me o Nome da categoria para apresentar informações\n");
                             valor = sc.nextLine();
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura=7), procura=6, valor, imp);
+                            valor = sc.nextLine();
+                            imp = "2;5;6;7;8";
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 6, valor, imp);
                             break;
                         case 5:
-                            opcao = 2;
+                            opcao = 2; //opcao para saltar logo para o menu inicial
                             break;
                     }
 
                     break;
+
                 case 5:
+                    imp = "7;8";
+                    System.out.println("Top de jogos");
+
+                    int top = sc.nextInt();//  imprime o top de jogos
+                    imprimirResultados(topArray(distinctArray(lerDados(linhas()), procura = 7), procura = 8, top), imp, (top + 1));
+                    System.out.println("\n\n");
+                    imp = "0;1;2;7;8";
+                    top = 2;
+                    imprimirResultados(topArray(lerDados(linhas()), procura = 8, top), imp, top);
+
                     break;
                 case 6:
-                    break;
-                case 7:
                     System.out.println("Obrigado por ter usado o nosso programa.");
                     break;
             }
-            System.out.println("\nDeseja repetir o programa? Sim para seguir, outra tecla para sair");
-            decisao = sc.next();
-            if (decisao.equals("Sim") || opcao == 2) {
-                opcao = 2;
+            if (opcao == 2) {
             } else {
-                System.out.println("Obrigado por utilizar o programa!");
-                opcao = 7;
+                System.out.println("\nDeseja repetir o programa? Sim para seguir, outra tecla para sair");
+                decisao = sc.next();
+                if (decisao.equals("Sim")) { // para voltar diretamente ao menu anterior
+                    opcao = 2;
+                } else {
+                    System.out.println("Obrigado por utilizar o programa!");
+                    opcao = 6;
+                }
             }
-        } while (opcao != 7);
+        }
+        while (opcao != 6);
 
     }
 
     public static void imprimir() throws FileNotFoundException {
+        // Imprimir apenas o conteudo da consola
         Scanner ficheiro = new Scanner(new File("DB/GameStart.csv"));
 
 
@@ -131,6 +144,7 @@ ser uma função própria (objeto de valorização)).
     }
 
     public static int linhas() throws FileNotFoundException {
+        // Ver o numero de linhas total do ficheiro para poder atribuir o Length maximo na minha matriz
         Scanner ficheiro = new Scanner(new File("DB/GameStart.csv"));
         int linhas = 0; // para saber posteriormente o tamanho de linhas do array
 
@@ -144,6 +158,8 @@ ser uma função própria (objeto de valorização)).
     }
 
     public static String[][] lerDados(int linhas) throws FileNotFoundException {
+
+        // Ler os dados e coloca-los todos numa matriz
         Scanner ficheiro = new Scanner(new File("DB/GameStart.csv"));
         String[][] dados = new String[linhas][12]; // dou um indice de colunas max, neste caso maior para poder adicionar info pertinente
         int index = 0;
@@ -163,6 +179,7 @@ ser uma função própria (objeto de valorização)).
     }
 
     public static double totalVendas(String[][] dados) throws FileNotFoundException {
+        // Função simples para obter o valor das vendas
         double totalVendas = 0;
 
         for (int i = 1; i < dados.length; i++) {
@@ -202,11 +219,12 @@ ser uma função própria (objeto de valorização)).
         return distinctArray;
     }
 
+    // Simples sub menu de pesquisa
     public static int menuPesquisa() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int subopcao;
         do {
-            System.out.println("Quer pesquisar por que colune");
+            System.out.println("\nQuer pesquisar por que colune");
             System.out.println("1 - IdCliente");
             System.out.println("2 - NomeCliente");
             System.out.println("3 - Editora");
@@ -223,44 +241,77 @@ ser uma função própria (objeto de valorização)).
 
     }
 
-    public static void imprimirUnico(String[][] matriz, int procura, String valor, String imp) throws FileNotFoundException {
+    public static void imprimirUnico(String[][] matriz, int procura, String valor, String imp) throws
+            FileNotFoundException {
 
-        String[] info = imp.split(";");
+        // Com esta funçao consigo imprimir as colunas que envio  junto com o filtro que eu quero
+
+        String[] info = imp.split(";"); // para imprimir o parametro de string que envio paa impressao das colunas que quero
         int index;
 
 
         for (int i = 0; i < matriz.length; i++) {
-            index=0;
-            if (Objects.equals(matriz[i][procura], valor)) {
-                for (int z = 0; z < info.length; z++) {
+            index = 0; //
 
-                    System.out.print(" | " + matriz[i][Integer.parseInt(info[index])] + " | ");
+            if (matriz[i][procura] != null) {
+                if (matriz[i][procura].equals(valor)) { //antigamente tinha o Objects.equals porque havia momentos em que havia nulls, adicionando a condiçao de != null consegui revertar para .equals
+                    for (int z = 0; z < info.length; z++) {
 
-                    index++;
+                        System.out.print(" | " + matriz[i][Integer.parseInt(info[index])] + " | ");
+
+                        index++;
+                    }
+                    System.out.println("");
                 }
-                System.out.println("");
-            }
 
-            ;
+            }
         }
 
     }
 
+    public static void imprimirResultados(String[][] toparray, String imp, int top) {
+        String[] info = imp.split(";"); // para imprimir o parametro de string que envio paa impressao das colunas que quero
+        int index;
+        for (int i = 1; i < top; i++) {
+            index = 0;
+            for (int z = 0; z < info.length; z++) {
 
-    public static void retornarLinhas(String[][] dados, String input, int coluna) throws FileNotFoundException {
+                System.out.print(" | " + toparray[i][Integer.parseInt(info[index])] + " | ");
+
+                index++;
+            }
+            System.out.println("");
+
+        }
+    }
+
+    public static String[][] topArray(String[][] distinct, int procura, int top) throws FileNotFoundException {
+        String[][] temp = new String[distinct.length][distinct[0].length];
+        // Fazer o top de array
+        for (int x = 1; x < distinct.length - 1; x++) { // começo com a linha a 1 porque a linha 0 e as do cabeçalhos
+
+            if (distinct[x][procura] != null) {  // coloquei este if apenas para nao haver comparações com nulls que existem na matriz
+                for (int y = x + 1; y < distinct.length; y++) {
+                    if (distinct[y][procura] != null) { // coloquei este if apenas para nao haver comparações com nulls que existem na matriz
 
 
-        for (int x = 1; x < dados.length; x++) {
-            if (input.equals(dados[x][coluna])) {
-                for (int y = 0; y < dados[0].length; y++) {
-                    if (dados[x][y] != null) {
-                        System.out.print(" | " + dados[x][y] + " | ");
+                        if (Double.parseDouble(distinct[y][procura]) > Double.parseDouble(distinct[x][procura])) {
+
+                            for (int t = 0; t < distinct[0].length; t++) { // fazer a troca de todos os valores de colunas da matriz
+                                temp[x][t] = distinct[x][t];
+                                distinct[x][t] = distinct[y][t];
+                                distinct[y][t] = temp[x][t];
 
 
+                            }
+                        }
                     }
                 }
+
             }
         }
+
+        return distinct;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
