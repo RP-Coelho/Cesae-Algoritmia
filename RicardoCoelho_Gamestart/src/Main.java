@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +19,11 @@ ser uma função própria (objeto de valorização)).
     public static void menu() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int opcao;
-        String decisao;
+        int subopcao;
+        double lucro;
+        String decisao, imp, valor;
+        int procura;
+
         do {
 
             do {
@@ -31,7 +36,7 @@ ser uma função própria (objeto de valorização)).
                 System.out.println("5 - Dada uma Editora, imprima todos géneros e os respetivos jogos");
                 System.out.println("6 - Imprima qual o jogo mais caro e os clientes que o compraram ");
                 System.out.println("7 - Sair do Programa");
-                System.out.println("---------------------------------");
+                System.out.println("-----------------------------------------------------------------------------------");
                 System.out.println("Qual a opção escolhida");
                 opcao = sc.nextInt();
 
@@ -46,16 +51,51 @@ ser uma função própria (objeto de valorização)).
                     System.out.println("€");
                     break;
                 case 3:
-                    double lucro = 0.1;
+                    lucro = 0.1;
                     System.out.print("O lucro da GameStart ao longo das " + (lerDados(linhas()).length - 1) + " é de ");
                     System.out.printf("%.2f", totalVendas(lerDados(linhas())) * lucro);
                     System.out.println("€");
                     break;
                 case 4:
-                    System.out.println("Diga-me um IdCliente para apresentar informações");
-                    String id = sc.next();
-                    int colunas = 1;
-                    retornarLinhas(lerDados(linhas()), id, colunas);
+                    subopcao = menuPesquisa();
+                    switch (subopcao) {
+                        case 1:
+
+                            System.out.println("Diga-me um IdCliente para apresentar informações");
+                            valor = sc.next();
+                            procura = 1;
+                            imp = "2;3;4";
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura), procura, valor, imp);
+
+                            break;
+                        case 2:
+
+                            System.out.println("Diga-me o Nome do Cliente para apresentar informações");
+                            valor = sc.nextLine();
+                            valor = sc.nextLine();
+                            imp = "0;5;6;7;8";
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura=7), procura=2, valor, imp);
+
+                            break;
+                        case 3:
+
+                            System.out.println("Diga-me o Nome da editora para apresentar informações");
+                            valor = sc.nextLine();
+                            valor = sc.nextLine();
+                            imp = "5;6;7";
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura=7), procura=5, valor, imp);
+
+                            break;
+                        case 4:
+                            System.out.println("Diga-me o Nome da categoria para apresentar informações");
+                            valor = sc.nextLine();
+                            imprimirUnico(distinctArray(lerDados(linhas()), procura=7), procura=6, valor, imp);
+                            break;
+                        case 5:
+                            opcao = 2;
+                            break;
+                    }
+
                     break;
                 case 5:
                     break;
@@ -67,7 +107,7 @@ ser uma função própria (objeto de valorização)).
             }
             System.out.println("\nDeseja repetir o programa? Sim para seguir, outra tecla para sair");
             decisao = sc.next();
-            if (decisao.equals("Sim")) {
+            if (decisao.equals("Sim") || opcao == 2) {
                 opcao = 2;
             } else {
                 System.out.println("Obrigado por utilizar o programa!");
@@ -133,19 +173,93 @@ ser uma função própria (objeto de valorização)).
 
     }
 
+    public static String[][] distinctArray(String[][] dados, int procura) throws FileNotFoundException {
+        String[][] distinctArray = new String[dados.length][dados[0].length];
+        int index = 1;
+
+
+        for (int i = 1; i < dados.length; i++) {
+            int flag = 0;
+            for (int z = i + 1; z < dados.length; z++) {
+                if (dados[i][procura].equals(dados[z][procura])) {
+                    flag = 1;
+                    break;
+                }
+            }
+            if (flag == 0) {
+                for (int z = 0; z < dados[0].length; z++) {
+                    if (dados[i][z] != null) {
+                        distinctArray[index][z] = dados[i][z];
+
+                    }
+                }
+                index++;
+
+            }
+
+        }
+
+        return distinctArray;
+    }
+
+    public static int menuPesquisa() throws FileNotFoundException {
+        Scanner sc = new Scanner(System.in);
+        int subopcao;
+        do {
+            System.out.println("Quer pesquisar por que colune");
+            System.out.println("1 - IdCliente");
+            System.out.println("2 - NomeCliente");
+            System.out.println("3 - Editora");
+            System.out.println("4 - Categoria");
+            System.out.println("5- Voltar ao menu anterior");
+            System.out.println("\nQue opção deseja filtrar");
+
+            subopcao = sc.nextInt();
+
+        } while (subopcao < 1 || subopcao > 5);
+
+        return subopcao;
+
+
+    }
+
+    public static void imprimirUnico(String[][] matriz, int procura, String valor, String imp) throws FileNotFoundException {
+
+        String[] info = imp.split(";");
+        int index;
+
+
+        for (int i = 0; i < matriz.length; i++) {
+            index=0;
+            if (Objects.equals(matriz[i][procura], valor)) {
+                for (int z = 0; z < info.length; z++) {
+
+                    System.out.print(" | " + matriz[i][Integer.parseInt(info[index])] + " | ");
+
+                    index++;
+                }
+                System.out.println("");
+            }
+
+            ;
+        }
+
+    }
+
+
     public static void retornarLinhas(String[][] dados, String input, int coluna) throws FileNotFoundException {
 
 
         for (int x = 1; x < dados.length; x++) {
             if (input.equals(dados[x][coluna])) {
                 for (int y = 0; y < dados[0].length; y++) {
-                    if (dados[x][y] != null){
+                    if (dados[x][y] != null) {
                         System.out.print(" | " + dados[x][y] + " | ");
+
+
                     }
                 }
-                System.out.println("");
             }
-
         }
     }
 

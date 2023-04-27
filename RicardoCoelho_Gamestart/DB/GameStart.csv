@@ -1,4 +1,4 @@
-idVenda;idCliente;nomeCliente;contacto;email;editora;categoria;jogo;valor
+VidVenda;idCliente;nomeCliente;contacto;email;editora;categoria;jogo;valor
 V00-001;1;Vitor Santos;910000001;vitor.santos@gmail.com;CD Projekt Red;RPG;The Witcher III: Wild Hunt;39.99
 V00-002;1;Vitor Santos;910000001;vitor.santos@gmail.com;Team Cherry;Metroidvania;Hollow Knight;19.99
 V00-003;2;Luis Camoes;910000002;lusiadas@gmail.com;Xbox Game Studios;Estrategia;Age of Empires IV;35.99
