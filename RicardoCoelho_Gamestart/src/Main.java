@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -14,13 +15,11 @@ ser uma função própria (objeto de valorização)).
     6. Imprima qual o jogo mais caro e os clientes que o compraram.*/
 
     /* Menu de opções */
-    public static void menu() throws FileNotFoundException {
+    public static void menu() throws FileNotFoundException, InputMismatchException {
         Scanner sc = new Scanner(System.in);
-        int opcao;
-        int subopcao;
         double lucro;
         String decisao, imp, valor;
-        int procura;
+        int top, procura, opcao, subopcao;
 
         do {
 
@@ -40,75 +39,134 @@ ser uma função própria (objeto de valorização)).
             } while (opcao < 1 || opcao > 7);
             switch (opcao) {
                 case 1:
-                    imprimir(); // função basica de impressão de ficheiros
+                    try {
+                        imprimir(); // função basica de impressão de ficheiros
+                    } catch (FileNotFoundException exception) {
+                        System.out.println("Ficheiro não encontrado - path: Menu Principal- case 1");
+                    }
                     break;
                 case 2:
-                    System.out.print("\nO numero de vendas efectuado é " + (lerDados(linhas()).length - 1) + " e o total arrecadado é "); // Uso a função de ler a matriz, coloco o numero de length e retiro a linha de cabeçalho e será sempre o numero de vendas maximo
-                    System.out.printf("%.2f", totalVendas(lerDados(linhas()))); // função que le a matriz anterior e calcula a soma das vendas
-                    System.out.println("€ \n");
-                    break;
-                case 3:
-                    lucro = 0.1;
-                    System.out.print("\nO lucro da GameStart ao longo das " + (lerDados(linhas()).length - 1) + " é de ");
-                    System.out.printf("%.2f", totalVendas(lerDados(linhas())) * lucro);//pego já no valor anterior e apenas multiplico pelo mesmo exercicio anterior
-                    System.out.println("€ \n");
-                    break;
-                case 4: // Quis complicar um pouco o pensamento e usar uma forma de filtrar com mais criterios.
-                    subopcao = menuPesquisa(); // vai buscar umuma opção para aplicar neste novo switch, podia ter colocado tudo na função "menuPesquisa" que seria talvez mais readable e apenas colocava aqui uma condição adicional com o valor "final" que a função corresse caso fosse para voltar ao menu anterior
-                    switch (subopcao) {
-                        case 1:
+                    try {
 
-                            System.out.println("\n Diga-me um IdCliente para apresentar informações\n");
-                            valor = sc.next(); // input de cliente
-                            procura = 1; // em que coluna estou a buscar esta informação // caso haja mudanças na ordem de colunas, conseguimos ja com uma simples pesquisa previa passar esse novo valor como parametro
-                            imp = "2;3;4"; // colunas a imprimir, podemos adicionar ou remover ou mesmo passar essa pergunta para o utilizador
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura), procura, valor, imp);
 
-                            break;
-                        case 2:
-
-                            System.out.println("\nDiga-me o Nome do Cliente para apresentar informações\n");
-                            valor = sc.nextLine();
-                            valor = sc.nextLine();
-                            imp = "0;5;6;7;8";
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 2, valor, imp);
-
-                            break;
-                        case 3:
-
-                            System.out.println("\nDiga-me o Nome da editora para apresentar informações\n");
-                            valor = sc.nextLine();
-                            valor = sc.nextLine();
-                            imp = "5;6;7";
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 5, valor, imp);
-
-                            break;
-                        case 4:
-                            System.out.println("\nDiga-me o Nome da categoria para apresentar informações\n");
-                            valor = sc.nextLine();
-                            valor = sc.nextLine();
-                            imp = "2;5;6;7;8";
-                            imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 6, valor, imp);
-                            break;
-                        case 5:
-                            opcao = 2; //opcao para saltar logo para o menu inicial
-                            break;
+                        System.out.print("\nO numero de vendas efectuado é " + (lerDados(linhas()).length - 1) + " e o total arrecadado é "); // Uso a função de ler a matriz, coloco o numero de length e retiro a linha de cabeçalho e será sempre o numero de vendas maximo
+                        System.out.printf("%.2f", totalVendas(lerDados(linhas()))); // função que le a matriz anterior e calcula a soma das vendas
+                        System.out.println("€ \n");
+                    } catch (FileNotFoundException exception) {
+                        System.out.println("Ficheiro não encontrado - path: Menu Principal- case 2");
                     }
 
                     break;
+                case 3:
+                    try {
+                        lucro = 0.1;
+                        System.out.print("\nO lucro da GameStart ao longo das " + (lerDados(linhas()).length - 1) + " é de ");
+                        System.out.printf("%.2f", totalVendas(lerDados(linhas())) * lucro);//pego já no valor anterior e apenas multiplico pelo mesmo exercicio anterior
+                        System.out.println("€ \n");
+                    } catch (FileNotFoundException exception) {
+                        System.out.println("Ficheiro não encontrado - path: Menu Principal- case 3");
+                    }
+                    break;
+                case 4: // Quis complicar um pouco o pensamento e usar uma forma de filtrar com mais criterios.
+                    try {
+                        subopcao = menuPesquisa(); // vai buscar umuma opção para aplicar neste novo switch, podia ter colocado tudo na função "menuPesquisa" que seria talvez mais readable e apenas colocava aqui uma condição adicional com o valor "final" que a função corresse caso fosse para voltar ao menu anterior
+
+
+                        switch (subopcao) {
+                            case 1:
+                                try {
+
+
+                                    System.out.println("\n Diga-me um IdCliente para apresentar informações\n");
+                                    valor = sc.next(); // input de cliente
+                                    procura = 1; // em que coluna estou a buscar esta informação // caso haja mudanças na ordem de colunas, conseguimos ja com uma simples pesquisa previa passar esse novo valor como parametro
+                                    imp = "2;3;4"; // colunas a imprimir, podemos adicionar ou remover ou mesmo passar essa pergunta para o utilizador
+                                    imprimirUnico(distinctArray(lerDados(linhas()), procura), procura, valor, imp);
+                                } catch (InputMismatchException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 1");
+                                } catch (ArrayIndexOutOfBoundsException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 1 - index fora dos limites");
+                                }
+                                break;
+                            case 2:
+                                try {
+                                    System.out.println("\nDiga-me o Nome do Cliente para apresentar informações\n");
+                                    valor = sc.nextLine();
+                                    valor = sc.nextLine();
+                                    imp = "0;5;6;7;8";
+                                    imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 2, valor, imp);
+                                } catch (InputMismatchException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 2");
+                                } catch (ArrayIndexOutOfBoundsException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 2 - index fora dos limites");
+                                }
+
+                                break;
+                            case 3:
+                                try {
+                                    System.out.println("\nDiga-me o Nome da editora para apresentar informações\n");
+                                    valor = sc.nextLine();
+                                    valor = sc.nextLine();
+                                    imp = "5;6;7";
+                                    imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 5, valor, imp);
+                                } catch (InputMismatchException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 3");
+                                } catch (ArrayIndexOutOfBoundsException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 3 - index fora dos limites");
+                                }
+
+                                break;
+                            case 4:
+                                try {
+                                    System.out.println("\nDiga-me o Nome da categoria para apresentar informações\n");
+                                    valor = sc.nextLine();
+                                    valor = sc.nextLine();
+                                    imp = "2;5;6;7;8";
+                                    imprimirUnico(distinctArray(lerDados(linhas()), procura = 7), procura = 6, valor, imp);
+                                } catch (InputMismatchException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 3");
+                                } catch (ArrayIndexOutOfBoundsException exception) {
+                                    System.out.println("Submenu - Escolha incorrecta case 3 - index fora dos limites");
+                                }
+
+                                break;
+                            case 5:
+                                opcao = 2; //opcao para saltar logo para o menu inicial
+                                break;
+                        }
+                    } catch (InputMismatchException exception) {
+                        System.out.println("Submenu - Escolha incorrecta");
+                        opcao = 2;
+
+                    }
+                    break;
 
                 case 5:
-                    imp = "7;8";
-                    System.out.println("Top de jogos");
+                    try {
+                        imp = "7;8";
+                        System.out.println("Top de jogos");
 
-                    int top = sc.nextInt();//  imprime o top de jogos
-                    imprimirResultados(topArray(distinctArray(lerDados(linhas()), procura = 7), procura = 8, top), imp, (top + 1));
+                        top = sc.nextInt();//  imprime o top de jogos
+                        imprimirResultados(topArray(distinctArray(lerDados(linhas()), procura = 7), procura = 8), imp, (top + 1)); // o +1 e para saltar a linha dos cabeçalhos
+
+
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        System.out.println("Menu principal case 5 - index fora dos limites");
+                    } catch (InputMismatchException exception) {
+                        System.out.println("Menu principal case 5 - Escolha incorrecta");
+                    }
                     System.out.println("\n\n");
-                    imp = "0;1;2;7;8";
-                    top = 2;
-                    imprimirResultados(topArray(lerDados(linhas()), procura = 8, top), imp, top);
+                    try {
+                        imp = "0;1;2;7;8";
+                        top = 2;
 
-                    break;
+                        String[][] valorMax = topArray(distinctArray(lerDados(linhas()), procura = 7), procura = 8); //para achar o valor maior
+
+                        imprimirUnico(lerDados(linhas()), procura = 8, valorMax[1][8], imp); // passo o valor [1] referente ao numero mais alto para e a coluna 8 onde estao "os valores"
+                        break;
+                    } catch (ArrayIndexOutOfBoundsException exception) {
+                        System.out.println("Menu principal case 5 - index fora dos limites");
+                    }
                 case 6:
                     System.out.println("Obrigado por ter usado o nosso programa.");
                     break;
@@ -178,7 +236,7 @@ ser uma função própria (objeto de valorização)).
         return dados;
     }
 
-    public static double totalVendas(String[][] dados) throws FileNotFoundException {
+    public static double totalVendas(String[][] dados) throws ArrayIndexOutOfBoundsException {
         // Função simples para obter o valor das vendas
         double totalVendas = 0;
 
@@ -190,7 +248,7 @@ ser uma função própria (objeto de valorização)).
 
     }
 
-    public static String[][] distinctArray(String[][] dados, int procura) throws FileNotFoundException {
+    public static String[][] distinctArray(String[][] dados, int procura) throws ArrayIndexOutOfBoundsException {
         String[][] distinctArray = new String[dados.length][dados[0].length];
         int index = 1;
 
@@ -220,7 +278,7 @@ ser uma função própria (objeto de valorização)).
     }
 
     // Simples sub menu de pesquisa
-    public static int menuPesquisa() throws FileNotFoundException {
+    public static int menuPesquisa() throws InputMismatchException {
         Scanner sc = new Scanner(System.in);
         int subopcao;
         do {
@@ -242,7 +300,7 @@ ser uma função própria (objeto de valorização)).
     }
 
     public static void imprimirUnico(String[][] matriz, int procura, String valor, String imp) throws
-            FileNotFoundException {
+            ArrayIndexOutOfBoundsException, NumberFormatException, NullPointerException {
 
         // Com esta funçao consigo imprimir as colunas que envio  junto com o filtro que eu quero
 
@@ -269,7 +327,7 @@ ser uma função própria (objeto de valorização)).
 
     }
 
-    public static void imprimirResultados(String[][] toparray, String imp, int top) {
+    public static void imprimirResultados(String[][] toparray, String imp, int top) throws ArrayIndexOutOfBoundsException {
         String[] info = imp.split(";"); // para imprimir o parametro de string que envio paa impressao das colunas que quero
         int index;
         for (int i = 1; i < top; i++) {
@@ -285,7 +343,7 @@ ser uma função própria (objeto de valorização)).
         }
     }
 
-    public static String[][] topArray(String[][] distinct, int procura, int top) throws FileNotFoundException {
+    public static String[][] topArray(String[][] distinct, int procura) throws ArrayIndexOutOfBoundsException {
         String[][] temp = new String[distinct.length][distinct[0].length];
         // Fazer o top de array
         for (int x = 1; x < distinct.length - 1; x++) { // começo com a linha a 1 porque a linha 0 e as do cabeçalhos
@@ -315,6 +373,17 @@ ser uma função própria (objeto de valorização)).
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        menu();
+        try {
+            menu();
+        } catch (InputMismatchException exception) {
+
+            System.out.println("Erro de input escolhido");
+            System.out.println("Tente novamente");
+            menu();
+
+        } catch (FileNotFoundException exception) {
+            System.out.println("Ficheiro não encontrado!");
+        }
+
     }
 }
