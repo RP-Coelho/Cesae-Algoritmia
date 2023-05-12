@@ -5,12 +5,10 @@ public class Carro {
     private String modelo, marca;
     private int anoFabrico, cilindrada, potencia;
     private double litros100km;
+    private tipoCombustivel combustivelCarro;
+    private static int anoAtual = 2023;
 
-
-
-private tipoCombustivel combustivel;
-
-    public Carro(String marca, String modelo, int anoFabrico, int cilindrada, int potencia, double litros100km) {
+    public Carro(String marca, String modelo, int anoFabrico, int cilindrada, int potencia, double litros100km, tipoCombustivel combustivelCarro) {
         this.marca = marca;
         this.modelo = modelo;
         this.anoFabrico = anoFabrico;
@@ -18,7 +16,7 @@ private tipoCombustivel combustivel;
         this.cilindrada = cilindrada;
         this.potencia = potencia;
         this.litros100km = litros100km;
-
+        this.combustivelCarro = combustivelCarro;
     }
 
     public int getCilindrada() {
@@ -72,23 +70,86 @@ private tipoCombustivel combustivel;
 
     }
 
-public boolean  tipoCombustivel(tipoCombustivel combustivelCarro){
-
-
-    for (tipoCombustivel i : tipoCombustivel.values()) {
-        if(i.equals(combustivelCarro)){
-
-          return true;
-        }
+    public tipoCombustivel getCombustivelCarro() {
+        return combustivelCarro;
     }
 
-    return false;
-}
+    public void setCombustivelCarro(tipoCombustivel combustivelCarro) {
+        this.combustivelCarro = combustivelCarro;
+    }
+
+    public boolean tipoCombustivel(tipoCombustivel combustivelCarro) {
 
 
+        for (tipoCombustivel i : tipoCombustivel.values()) {
+            if (i.equals(combustivelCarro)) {
+
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
     public void ligarCarro() {
-        System.out.println("O carro esta ligado");
+        if ((anoAtual - this.anoFabrico) > 30) {
+            if (this.combustivelCarro.equals(tipoCombustivel.DIESEL)) {
+                System.out.println("Deita um pouco de fumo... Custa a pegar... O carro está ligado!");
+                System.out.println("Vrum-vrum-vrum");
+            } else {
+                System.out.println("Custa a pegar... O carro está ligado!");
+                System.out.println("Vrum-vrum-vrum");
+            }
+        } else {
+            if (this.potencia < 250) {
+                System.out.println("O carro está ligado!");
+                System.out.println("Vrummmmmmmm");
+            } else {
+                System.out.println("O carro está ligado!");
+                System.out.println("VRUMMMMMM");
+            }
+
+        }
     }
+
+    public Carro corrida(Carro carro2) {
+
+        if (this.potencia > carro2.potencia) {
+            return this;
+
+        } else if (this.potencia == carro2.potencia) {
+            if (this.cilindrada > carro2.cilindrada) {
+                return this;
+
+            } else if (this.cilindrada == carro2.cilindrada) {
+                if ((anoAtual - this.anoFabrico) > (anoAtual - carro2.anoFabrico)) {
+                    return this;
+
+                } else if ((anoAtual - this.anoFabrico) == (anoAtual - carro2.anoFabrico)) {
+                    return null;
+
+                } else {
+                    return carro2;
+
+                }
+
+            } else {
+                return carro2;
+
+            }
+
+        } else {
+            return carro2;
+
+        }
+
+
+    }
+
+    public double consumoCombustivel(double km) {
+        return km / 100 * this.litros100km;
+    }
+
+
 }

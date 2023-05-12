@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ex1 {
@@ -12,32 +13,20 @@ idade e altura*/
         int idade = 30;
         double altura = 1.60;
 
-        Pessoa ricardo = new Pessoa(nome,idade,altura);
-        Pessoa gabriel = new Pessoa("Gabriel",29,1.73);
-        System.out.println("Diga-me o seu nome");
-       String nomeInput=input.nextLine();
-        System.out.println("Diga-me a sua idade");
-        idade= input.nextInt();
-        System.out.println("Diga-me a sua altura");
-        altura= input.nextDouble();
 
-        Pessoa nomeRandom = new Pessoa(nomeInput,idade,altura);
+        Pessoa ricardo = new Pessoa(nome, idade, altura, "example@gmail.com", 9874573);
+        Pessoa gabriel = new Pessoa("Gabriel", 29, 1.73, "teste@gmail.com", 9874573);
+        Pessoa nomeRandom = new Pessoa("Joaquim", 35, 1.85, "blabla@gmail.com", 9874573);
 
-        System.out.println("Nom da primeira Pessoa: " + ricardo.getNome());
-        System.out.println("Idade da primera Pessoa: " + ricardo.getIdade());
-        System.out.println("Altura da primeira Pessoa " + ricardo.getAltura());
+        ArrayList<Pessoa> agenda = new ArrayList<>();
+        agenda.add(ricardo);
+        agenda.add(gabriel);
+        agenda.add((nomeRandom));
 
-        System.out.println("\n ----------------------- \n");
+Agenda listaPessoa= new Agenda(agenda);
 
-        System.out.println("Nom da segunda Pessoa: " + gabriel.getNome());
-        System.out.println("Idade da segunda Pessoa: " + gabriel.getIdade());
-        System.out.println("Altura da segunda Pessoa " + gabriel.getAltura());
-
-        System.out.println("\n ----------------------- \n");
-
-        System.out.println("Nom da terceira Pessoa: " + nomeRandom.getNome());
-        System.out.println("Idade da terceira Pessoa: " + nomeRandom.getIdade());
-        System.out.println("Altura da terceira Pessoa " + nomeRandom.getAltura());
+        System.out.println("------");
+        listaPessoa.getAll();
     }
 
 }

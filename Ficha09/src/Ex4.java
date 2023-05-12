@@ -1,28 +1,31 @@
-import java.util.Scanner;
-
 public class Ex4 {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
 
-        System.out.println("Diga-me o raio da circunferencia");
-        double raio= input.nextDouble();
+        Imovel casa1 = new Imovel("Rua das 13 casas", "Porto", 165, 3, 2, Tipo.casa, Acabamento.altoAcabamento, 105, 10);
 
-
-        Circulo circulo = new Circulo(raio);
-
-        System.out.println("A area da circunferencia é de " + circulo.area());
-        System.out.println("O perimetro da circunferencia é de " + circulo.perimetro());
+        Imovel casa2 = new Imovel("Rua das 12 casas", "Gaia", 185, 2, 1, Tipo.mansão, Acabamento.restauro, 255, 40);
 
 
-        System.out.println("o raio da circunferencia mudou?");
-circulo.setRaio(input.nextDouble());
+        casa1.imprimirDescricao();
 
-        System.out.println("A area da circunferencia é de " + circulo.area());
-        System.out.println("O perimetro da circunferencia é de " + circulo.perimetro());
+        System.out.println("-------");
+        casa2.imprimirDescricao();
 
+        if (casa1.compararImoveis(casa2) == null) {
+            System.out.println("As casas tem o mesmo valor " + casa1.getValorTotal() + "€");
 
+        } else if (casa1.compararImoveis(casa2) == casa1) {
+            System.out.println("A casa 1 tem o maior valor " + casa1.getValorTotal() + "€");
+            System.out.println("A casa 2 tem " + casa2.getValorTotal());
 
+        } else {
+            System.out.println("A casa 2 tem o maior valor " + casa2.getValorTotal() + "€");
+            System.out.println("A casa 1 tem " + casa1.getValorTotal());
+        }
+
+        casa2.setAcabamentoImovel(Acabamento.nova);
+        casa2.imovelCalculo();
+
+        casa2.imprimirDescricao();
     }
-
-
 }
