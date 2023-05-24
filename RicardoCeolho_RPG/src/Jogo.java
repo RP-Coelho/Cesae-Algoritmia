@@ -1,9 +1,5 @@
-import Entidades.Heroi.TipoHeroi.Cavaleiro;
-import Enums.TipoHeroi;
+import Instanciar.CreateCharacter;
 
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-import java.util.EnumSet;
-import java.util.Enumeration;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -48,6 +44,7 @@ public class Jogo {
         personagem = CreateCharacter.menuPontos(opcaoDificuldade);
 
             CreateCharacter.instanciar(opcaoHeroi, personagem);
+
 
 
 

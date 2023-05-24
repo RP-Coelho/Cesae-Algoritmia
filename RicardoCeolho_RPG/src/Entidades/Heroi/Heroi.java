@@ -15,14 +15,18 @@ public abstract class Heroi extends Entidade {
     private int nivel, ouro;
     private Arma arma;
     private ArrayList<Pocao> myPotions;
-
+    private final int vidaTotal = this.getVida();
 
     public Heroi(String nome, int vida, int forca, int ouro, Arma arma, ArrayList<Pocao> myPotions) {
         super(nome, vida, forca);
-        this.nivel = 1 ;
+        this.nivel = 1;
         this.ouro = ouro;
         this.arma = arma;
         this.myPotions = myPotions;
+    }
+
+    public int getVidaTotal() {
+        return vidaTotal;
     }
 
     public Heroi(String nome, int[] personagem, Arma arma, ArrayList<Pocao> myPotions) {

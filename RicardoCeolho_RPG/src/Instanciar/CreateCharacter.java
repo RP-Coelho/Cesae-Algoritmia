@@ -1,13 +1,14 @@
+package Instanciar;
+
 import Entidades.Heroi.Heroi;
 import Entidades.Heroi.TipoHeroi.Cavaleiro;
 import Enums.TipoHeroi;
 import Itens.Arma;
 import Itens.Pocao;
 
+import javax.crypto.spec.PSource;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public final class CreateCharacter {
 
@@ -86,26 +87,22 @@ public final class CreateCharacter {
 
     public static Heroi instanciar(int i, int[] personagem) {
 
-        switch (i) {
-            case 1:
-                ArrayList<TipoHeroi> kitIniciante = new ArrayList<>();
-                kitIniciante.add(TipoHeroi.CAVALEIRO);
-                Arma lanca = new Arma("Lança de principiante",0,kitIniciante,10);
-                System.out.println("Como se vai chamar o seu Cavaleiro: ");
+        if (i == 1) {
 
-                Cavaleiro personagemPrincipal = new Cavaleiro(input.next(), personagem, lanca, );
+            Arma lanca = Listagem.ArmaBegginner(TipoHeroi.CAVALEIRO);
+            return new Cavaleiro(input.next(), personagem, lanca, Listagem.PocaoBegginner());
+        } else if (i == 2) {
 
 
+            Arma cajado = Listagem.ArmaBegginner(TipoHeroi.FEITICEIRO);
+            return new Cavaleiro(input.next(), personagem, cajado, Listagem.PocaoBegginner());
+        } else {
+            Arma arco = Listagem.ArmaBegginner(TipoHeroi.ARQUEIRO);
+            return new Cavaleiro(input.next(), personagem, arco, Listagem.PocaoBegginner());
 
         }
 
     }
-
-    public static Arma armaPrincipiane(int i){
-
-
-    }
-
 
 
 }
