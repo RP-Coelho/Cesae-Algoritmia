@@ -56,11 +56,17 @@ public class BikeDemo {
 
         // Adicionar uma nova bicicleta ao array de bicicletas //
         lojaBiclas.add(biciEntregaComida);
-
+        lojaBiclas.remove(biciEntrega);
         // Atualizar o array de bicicletas //
         lojabicicletas.setBikemanagement(lojaBiclas);
 
         // Dados Atualizados //
         lojabicicletas.exibirDetalhes();
+
+
+
+
+
+
     }
 }

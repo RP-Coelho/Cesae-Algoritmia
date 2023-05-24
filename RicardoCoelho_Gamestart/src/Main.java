@@ -171,7 +171,7 @@ ser uma função própria (objeto de valorização)).
                     System.out.println("Obrigado por ter usado o nosso programa.");
                     break;
             }
-            if (opcao == 2) {
+                if (opcao == 2) {
             } else {
                 System.out.println("\nDeseja repetir o programa? Sim para seguir, outra tecla para sair");
                 decisao = sc.next();

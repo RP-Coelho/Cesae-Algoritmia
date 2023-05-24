@@ -8,6 +8,7 @@ public class MountainBike extends Bicycle{
     private ArrayList<BikeTools> bikeTools;
     private MountainBikeSuspension suspension;
 
+
     public MountainBike(int id, int numberOfGears, String mainColor, float weelSize, float bikeLength, float price, boolean adjustableSeatPost, int numberOfLights, ArrayList<BikeTools> bikeTools, MountainBikeSuspension suspension) {
         super(id, numberOfGears, mainColor, weelSize, bikeLength, price, adjustableSeatPost);
         this.numberOfLights = numberOfLights;
@@ -41,13 +42,13 @@ public class MountainBike extends Bicycle{
 
     public void exibirDetalhes(){
 
-        System.out.println("id: " + super.getId());
-        System.out.println("Numero de mudanças: "+ super.getNumberOfGears());
-        System.out.println("Cor: " + super.getMainColor());
-        System.out.println("Tamanho da roda: "+super.getWeelSize());
-        System.out.println("Tamanho da bicileta: "+super.getBikeLength());
-        System.out.println("Preço: "+super.getPrice());
-        if(super.isAdjustableSeatPost()){
+        System.out.println("id: " + this.getId());
+        System.out.println("Numero de mudanças: "+ this.getNumberOfGears());
+        System.out.println("Cor: " + this.getMainColor());
+        System.out.println("Tamanho da roda: "+this.getWeelSize());
+        System.out.println("Tamanho da bicileta: "+this.getBikeLength());
+        System.out.println("Preço: "+this.getPrice());
+        if(this.isAdjustableSeatPost()){
             System.out.println("Tem assento ajustavel");
         }else{
             System.out.println("Não tem assendo ajustavel");
@@ -60,6 +61,71 @@ public class MountainBike extends Bicycle{
 
         }
         System.out.println("\n");
+
+/*
+
+         * Metodo que recebe uma bikeTool e adiciona ao array
+
+        public void addBikeTool(BikeTools toolToAdd){
+            this.bikeTools.add(toolToAdd);
+
+        }
+
+
+         * Metodo que recebe uma ArrayList de biketools e adiconar
+         *
+
+        public void addBikeTool(ArrayList<BikeTools> toolsToAdd){
+            for (BikeTools tools: toolsToAdd) {
+this.bikeTools.add(tools);
+            }
+        }
+
+        // Imprimir as BikeTools com o respectivo index
+        public void printBikeTool(){
+        int contador=0
+        System.out.print("Ferramentas da Bicicleta");
+        for( Biketools tools:this.biketools){
+
+        System.out.print(contador+" - "+tool);
+        contador++;
+        }
+        }
+
+
+        // metodo par sbstituir uma ferramenta dos bikeTools
+
+        public void setBikeTool(BikeTools toolToSet){
+            Scanner input = new Scanner(System.in)
+
+            // Imprimir na consola as ferramentas com o respetivo indice
+            printBikeTools();
+
+            ~// Ler do utilizador o indice da ferramenta a substituir
+            System.out.print("Qual a ferramenta que quer substituir: ");
+            int opcao = input.nextInt();
+
+            //Substituimos as ferramentas
+
+            this.bikeTools.set(opcao,toolToSet);
+
+        }
+
+
+        // Metodo paa remover uma ferramenta da bikeTools
+
+        public void removeBikeTool(){
+             Scanner input = new Scanner(System.in)
+
+            printBikeTools();
+
+
+            System.out.print("Qual a ferramenta que quer remover: ");
+            int opcao = input.nextInt();
+
+            this.bikeTools.remove(opcao);
+
+       */
     }
 
 
