@@ -31,6 +31,7 @@ public abstract class Heroi extends Entidade {
 
     public Heroi(String nome, int[] personagem, Arma arma, ArrayList<Pocao> myPotions) {
         super(nome, personagem[0], personagem[1]);
+        this.ouro = personagem[2];
         this.nivel = 1;
         this.arma = arma;
         this.myPotions = myPotions;
@@ -81,23 +82,33 @@ public abstract class Heroi extends Entidade {
         int count = 1;
         System.out.println("Os itens no inventario são:");
         for (Pocao pocao : this.myPotions) {
-            System.out.println(count + " - " + pocao.getNome() + " | " + pocao.getCura());
+            System.out.println(count + " - " + pocao.getNome() + " | " + pocao.getCura() + " vida");
             count++;
         }
         System.out.println("0 - Nao usar nada");
         try {
             System.out.println("\n Deseja usar algum item? - Indique o numero");
             int i = input.nextInt();
-            usarPocao(i);
+            if (i != 0) {
+                i -= 1;
+                usarPocao(i);
+            }
         } catch (InputMismatchException exception) {
             verInventario();
         }
     }
 
     public void usarPocao(int i) throws InputMismatchException {
-        this.setVida(myPotions.get(i).getCura());
+        if ((this.getVida() + myPotions.get(i).getCura()) > this.vidaTotal) {
+            this.setVida((this.vidaTotal - this.getVida()));
+
+        } else {
+            this.setVida(myPotions.get(i).getCura());
+
+        }
         myPotions.remove(i);
-        System.out.println("A sua vida recuperou para " + this.getVida());
+        System.out.println("A sua vida recuperou para +" + myPotions.get(i).getCura() + " vida");
+        System.out.println("Vida actual: " + this.getVida());
     }
 
 
@@ -105,10 +116,12 @@ public abstract class Heroi extends Entidade {
 
     @Override
     public final void exibirDetalhes() {
-        System.out.print("O seu heroi: " + this.getNome());
+        System.out.print("\nO seu heroi: " + this.getNome());
         System.out.println(" | O seu nivel: " + this.nivel);
         System.out.print("O seu ouro: " + this.getOuro());
-        System.out.print(" | a sua arma é" + this.arma.getNome() + " | dano: " + this.arma.getAtaque());
+        System.out.print(" | A força: " + this.getForca());
+        System.out.println(" | A sua vida: " + this.getVida());
+        System.out.print("A sua arma é " + this.arma.getNome() + " | dano: " + this.arma.getAtaque());
         System.out.println("\n");
         verInventario();
     }

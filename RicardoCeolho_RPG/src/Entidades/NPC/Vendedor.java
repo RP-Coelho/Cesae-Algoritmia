@@ -16,10 +16,11 @@ public class Vendedor {
 
     public void exibirInventario() {
         int count = 1;
+
         for (ItensHeroi item : this.item) {
             System.out.println(count + "Item");
             item.exibirDetalhes();
-            System.out.println("\n");
+            System.out.println("");
         }
 
     }

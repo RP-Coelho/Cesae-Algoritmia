@@ -1,30 +1,26 @@
+import Entidades.Heroi.Heroi;
 import Instanciar.CreateCharacter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import Jogo.Labirinto;
 
 public class Jogo {
 
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        int opcaoHeroi = 0, opcaoDificuldade = 0;
-        int [] personagem = new int[3];
+        int opcaoHeroi = 0, opcaoDificuldade = 0, repetir = 0;
+        int[] personagem = new int[3];
         String nomeHeroi;
-        /*
-
-    Elabore uma Classe Jogo com um método labirinto. Este método deve ser invocado no main desta mesma classe.
-    Inicialmente deve perguntar qual o tipo de herói com que o utilizador deseja jogar (Cavaleiro, Feiticeiro ou
-    Arqueiro). Seguidamente é perguntada a dificuldade, podendo ser Fácil ou Difícil. Seguidamente o utilizador pode
-    distribuir pontos de criação de personagem entre vida e força da sua personagem, sabendo que cada ponto de
-    vida vale um ponto de criação de personagem e cada ponto de força vale 5 pontos de criação de personagem,
-    assim o utilizador deve distribuir corretamente de modo a ficar com 0 pontos de criação da personagem. Se a
-    dificuldade for fácil tem direito a 300 pontos, se for difícil só tem direito a 220 pontos. A seguir é também atribuído
-    ouro à personagem, se a dificuldade for fácil tem direito a 20 moedas de ouro, se for difícil apenas a 15 moedas
-    de ouro.*/
+        Labirinto labirinto = new Labirinto();
 
         do {
             do {
+                System.out.println("\nBem vindo ao Path of Glory");
+                System.out.println("\nBem-vindo ao mundo de aventuras e mistérios medievais! Prepare-te para embarcar em uma jornada épica repleta de desafios e perigos para salvar a princesa raptada.\nNas profundezas de um labirinto sombrio e enigmático, a tua coragem será posta à prova enquanto enfrentas criaturas mágicas e superas obstáculos traiçoeiros." + "\nÈs um valente herói destinado a salvar a princesa, cujo desaparecimento mergulhou o reino em trevas e tristeza.\nA tua determinação e habilidades serão fundamentais para desbravar os corredores sinuosos do labirinto, enfrentando o desconhecido a cada passo dado." + "\nA cada esquina, encontrarás escolhas difíceis a serem feitas, enquanto os inimigos cruéis farão de tudo para impedir teu progresso.\nA sorte está lançada, e somente através de tua inteligência, astúcia e valentia poderás resgatar a princesa e trazer a luz de volta ao reino." + "O destino da princesa e a esperança de todo o reino repousam em suas mãos.\nSê corajoso, forje o teu caminho através do labirinto e torna-te a lenda que salvará o reino. \n\nQue a sorte esteja contigo!");
+
 
                 try {
                     opcaoHeroi = CreateCharacter.menuInicial();
@@ -34,6 +30,7 @@ public class Jogo {
                 }
 
             } while (opcaoHeroi < 1 || opcaoHeroi > 3);
+
             try {
                 opcaoDificuldade = CreateCharacter.menuDificuldade();
             } catch (InputMismatchException exception) {
@@ -41,18 +38,30 @@ public class Jogo {
                 opcaoDificuldade = CreateCharacter.menuDificuldade();
             }
 
-        personagem = CreateCharacter.menuPontos(opcaoDificuldade);
+            personagem = CreateCharacter.menuPontos(opcaoDificuldade);
 
-            CreateCharacter.instanciar(opcaoHeroi, personagem);
+            Heroi hero = CreateCharacter.instanciar(opcaoHeroi, personagem);
 
+            hero.exibirDetalhes();
+            System.out.println("\n");
 
+            if (labirinto.labirinto(hero)) {
+                System.out.println("Parabens ganhaste e isto mais tarde vai ser um TXT");
+            } else {
+                System.out.println("Perdeste e isto mais tarde vai ser um TXT");
+            }
+            do {
+                System.out.println("Queres repetir o labarinto com o mesmo character? 1- Sim | 2- Nao");
+                repetir = input.nextInt();
+            } while (repetir != 2);
 
+            System.out.println("Deseja sair do jogo? 1- Sim | 2- Nao");
+            repetir = input.nextInt();
 
-        }while();
+        } while (repetir != 1);
     }
 
 
 }
 
 
-}

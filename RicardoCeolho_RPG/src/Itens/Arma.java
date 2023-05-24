@@ -20,9 +20,14 @@ public class Arma extends ItensHeroi{
     @Override
     public void exibirDetalhes() {
         System.out.print(this.getNome());
-        System.out.print(" | "+this.getCusto());
-        System.out.print(" | "+this.ataque);
-        System.out.println("\n Disponivel apenas para");
-        System.out.println(" | "+ this.getTipo().listIterator());
+        System.out.print(" |Custo: "+this.getCusto());
+        System.out.print(" |Dano: "+this.ataque);
+        System.out.print("\n Disponivel apenas para");
+        for (TipoHeroi tipo: this.getTipo()
+             ) {
+            System.out.println(" | " + tipo);
+
+        }
+
     }
 }

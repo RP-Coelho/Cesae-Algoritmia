@@ -180,7 +180,7 @@ public class Listagem {
 
     }
 
-    public static ArrayList<Enemy> MonstrosIniciantes() {
+        public static Enemy MonstrosIniciantes() {
 
         ArrayList<Enemy> inimigosIniciantes = new ArrayList<>();
 
@@ -203,7 +203,15 @@ public class Listagem {
         inimigosIniciantes.add(murlock);
         inimigosIniciantes.add(bat);
 
-        return inimigosIniciantes;
+
+
+            ThreadLocalRandom random = ThreadLocalRandom.current();
+
+            int rand = random.nextInt(0, inimigosIniciantes.size());
+
+
+
+        return inimigosIniciantes.get(rand);
 
 
     }

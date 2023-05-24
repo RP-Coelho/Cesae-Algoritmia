@@ -31,6 +31,9 @@ public class Arqueiro extends Heroi {
         Scanner input = new Scanner(System.in);
         int opcao=0;
 
+        System.out.println("Deparaste com um: ");
+        npc.exibirDetalhes();
+
         while(npc.getVida()<=0 && this.getVida()<=0){
 
             System.out.println("O "+ this.getNome()+" ataca e faz "+ ataque() +" dano");

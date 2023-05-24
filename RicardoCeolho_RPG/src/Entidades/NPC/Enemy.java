@@ -11,6 +11,8 @@ public class Enemy extends Entidade {
 
     @Override
     public void exibirDetalhes() {
-
+        System.out.print("Nome: "+ this.getNome());
+        System.out.print(" | Vida: "+ this.getVida());
+        System.out.print(" | Forca: "+ this.getForca()+"\n");
     }
 }
