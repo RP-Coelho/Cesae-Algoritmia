@@ -23,9 +23,9 @@ public class Pocao extends ItensHeroi {
     public void exibirDetalhes() {
 
         System.out.print(this.getNome());
-        System.out.print(" | " + this.getCusto());
-        System.out.print(" | " + this.cura);
-        System.out.println("\n Disponivel apenas para");
-        System.out.println(" | " + this.getTipo().listIterator());
+        System.out.print(" | Custo: " + this.getCusto());
+        System.out.print(" | Cura: " + this.cura);
+        System.out.print("\nDisponivel apenas para");
+        System.out.println(" | " + this.getTipo());
     }
 }

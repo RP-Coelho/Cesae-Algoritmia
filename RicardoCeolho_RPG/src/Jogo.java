@@ -1,6 +1,8 @@
 import Entidades.Heroi.Heroi;
+import Entidades.Heroi.TipoHeroi.Arqueiro;
 import Instanciar.CreateCharacter;
 
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,13 +10,14 @@ import Jogo.Labirinto;
 
 public class Jogo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
 
         Scanner input = new Scanner(System.in);
         int opcaoHeroi = 0, opcaoDificuldade = 0, repetir = 0;
         int[] personagem = new int[3];
-        String nomeHeroi;
+        String nomeHeroi, loose = "src/Apoiotxt/Loose.txt", win = "src/Apoiotxt/Win.txt";
         Labirinto labirinto = new Labirinto();
+
 
         do {
             do {
@@ -31,12 +34,14 @@ public class Jogo {
 
             } while (opcaoHeroi < 1 || opcaoHeroi > 3);
 
+
             try {
                 opcaoDificuldade = CreateCharacter.menuDificuldade();
             } catch (InputMismatchException exception) {
                 System.out.println("Erro de escolha! Por favor tente de novo");
                 opcaoDificuldade = CreateCharacter.menuDificuldade();
             }
+
 
             personagem = CreateCharacter.menuPontos(opcaoDificuldade);
 
@@ -46,16 +51,30 @@ public class Jogo {
             System.out.println("\n");
 
             if (labirinto.labirinto(hero)) {
-                System.out.println("Parabens ganhaste e isto mais tarde vai ser um TXT");
+                Labirinto.Imprimir(win);
             } else {
-                System.out.println("Perdeste e isto mais tarde vai ser um TXT");
+                Labirinto.Imprimir(loose);
             }
             do {
-                System.out.println("Queres repetir o labarinto com o mesmo character? 1- Sim | 2- Nao");
-                repetir = input.nextInt();
-            } while (repetir != 2);
+                do {
 
-            System.out.println("Deseja sair do jogo? 1- Sim | 2- Nao");
+
+                    System.out.println("Queres repetir o labarinto com o mesmo character? 1 - Sim | 2 - Nao");
+                    repetir = input.nextInt();
+
+                } while (repetir < 1 || repetir > 2);
+                if (repetir == 1) {
+
+                    hero.setVida(hero.getVidaTotal()-hero.getVida());
+                    if (labirinto.labirinto(hero)) {
+                        Labirinto.Imprimir(win);
+                    } else {
+                        Labirinto.Imprimir(loose);
+                    }
+
+                }
+            } while (repetir != 2);
+            System.out.println("Deseja sair do jogo? 1 - Sim | 2 - Nao");
             repetir = input.nextInt();
 
         } while (repetir != 1);

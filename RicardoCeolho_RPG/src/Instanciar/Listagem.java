@@ -180,7 +180,7 @@ public class Listagem {
 
     }
 
-        public static Enemy MonstrosIniciantes() {
+    public static Enemy MonstrosIniciantes() {
 
         ArrayList<Enemy> inimigosIniciantes = new ArrayList<>();
 
@@ -190,7 +190,7 @@ public class Listagem {
         Enemy miliped = new Enemy("Scavenger miliped", 150, 7);
         Enemy warlock = new Enemy("Dark warlock", 60, 20);
         Enemy spider = new Enemy("Eight-legged wolf Spider", 120, 15);
-        Enemy ghost = new Enemy("Ghost Abomynation", 150, 8);
+        Enemy ghost = new Enemy("Ghost Abomynation", 180, 8);
 
         inimigosIniciantes.add(kobold);
         inimigosIniciantes.add(murlock);
@@ -204,11 +204,9 @@ public class Listagem {
         inimigosIniciantes.add(bat);
 
 
+        ThreadLocalRandom random = ThreadLocalRandom.current();
 
-            ThreadLocalRandom random = ThreadLocalRandom.current();
-
-            int rand = random.nextInt(0, inimigosIniciantes.size());
-
+        int rand = random.nextInt(0, inimigosIniciantes.size());
 
 
         return inimigosIniciantes.get(rand);
@@ -218,23 +216,24 @@ public class Listagem {
 
 
     public static Enemy FinalBoss() {
-
-        return new Enemy("Minotouro do Labirinto", 300, 25);
+        return new Enemy("Minotouro do Labirinto", 300, 30);
 
 
     }
 
     public static Vendedor vendedorEntrada() {
 
-        ArrayList<ItensHeroi> lista = new ArrayList<>(ListaVendedor());
-        int sublistsize = 10;
+        ArrayList<ItensHeroi> vendedor = ListaVendedor();
+        Collections.shuffle(vendedor);
+
+        int subListSize = 10;
 
         ThreadLocalRandom random = ThreadLocalRandom.current();
 
-        int rand = random.nextInt(0, (lista.size() - sublistsize));
+        int rand = random.nextInt(0, (vendedor.size() - subListSize));
 
-        lista.subList(rand, (rand + sublistsize));
 
+        ArrayList<ItensHeroi> lista = new ArrayList<>(vendedor.subList(rand, (rand + subListSize)));
 
         return new Vendedor(lista);
     }
