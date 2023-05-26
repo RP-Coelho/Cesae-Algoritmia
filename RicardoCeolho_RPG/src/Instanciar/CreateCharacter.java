@@ -6,10 +6,6 @@ import Entidades.Heroi.TipoHeroi.Cavaleiro;
 import Entidades.Heroi.TipoHeroi.Feiticeiro;
 import Enums.TipoHeroi;
 import Itens.Arma;
-import Itens.Pocao;
-
-import javax.crypto.spec.PSource;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public final class CreateCharacter {
@@ -19,27 +15,43 @@ public final class CreateCharacter {
 
     public static int menuInicial() throws InputMismatchException {
         int count = 1;
+        int opcao;
+        do {
+            System.out.println("\n");
+            System.out.println("Escolha umas das seguintes classes");
+            for (
+                    TipoHeroi tipo : TipoHeroi.values()) {
 
-        System.out.println("\n");
-        System.out.println("Escolha umas das seguintes classes");
-        for (
-                TipoHeroi tipo : TipoHeroi.values()) {
+                System.out.print(count + " - " + tipo + " | ");
+                count++;
+            }
 
-            System.out.print(count + " - " + tipo +" | ");
-            count++;
-        }
-        System.out.print("\nQual deseja - Insira o numero: ");
-        return input.nextInt();
+
+            System.out.print("\nQual deseja - Insira o numero: ");
+            opcao = input.nextInt();
+            if(opcao < 1 || opcao > 3){
+                System.out.println("Opcao Invalida. Por favor escolha de novo: ");
+            }
+        } while (opcao < 1 || opcao > 3);
+        return opcao;
     }
 
     public static int menuDificuldade() throws InputMismatchException {
+        int opcao;
+        do {
 
-        System.out.println("\n\nDeseja jogar isto em que modo");
-        System.out.print("1 - Facil | ");
-        System.out.print("2 - Dificil : ");
 
-        return input.nextInt();
+            System.out.println("\n\nDeseja jogar isto em que modo");
+            System.out.print("1 - Facil | ");
+            System.out.print("2 - Dificil : ");
+            opcao = input.nextInt();
+            if(opcao < 1 || opcao > 2){
+                System.out.println("Opcao Invalida. Por favor escolha de novo: ");
+            }
+        } while (opcao < 1 || opcao > 2);
+        return opcao;
     }
+
 
     public static int[] menuPontos(int i) {
         int[] personagem = new int[3];
@@ -67,11 +79,11 @@ public final class CreateCharacter {
             System.out.print("Quantos pontos quer usar em força: ");
             personagem[1] = input.nextInt() / 5;
 
-            soma -= personagem[0] + (personagem[1]*5);
+            soma -= personagem[0] + (personagem[1] * 5);
 
             if (soma > 0) {
                 System.out.print("Tem que usar os pontos todos! ");
-                System.out.println("Sobraram: "+soma );
+                System.out.println("Sobraram: " + soma);
             } else if (soma < 0) {
                 System.out.print("Distribuiu demasiados pontos!");
                 System.out.println("Usou a mais :" + soma);

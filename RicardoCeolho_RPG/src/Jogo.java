@@ -15,7 +15,7 @@ public class Jogo {
         Scanner input = new Scanner(System.in);
         int opcaoHeroi = 0, opcaoDificuldade = 0, repetir = 0;
         int[] personagem = new int[3];
-        String nomeHeroi, loose = "src/Apoiotxt/Loose.txt", win = "src/Apoiotxt/Win.txt";
+        String nomeHeroi, loose = "Apoio/Loose.txt", win = "Apoio/Win.txt";
         Labirinto labirinto = new Labirinto();
 
 
@@ -65,11 +65,19 @@ public class Jogo {
                 } while (repetir < 1 || repetir > 2);
                 if (repetir == 1) {
 
-                    hero.setVida(hero.getVidaTotal()-hero.getVida());
+                    hero.setVida(hero.getVidaTotal() - hero.getVida());
                     if (labirinto.labirinto(hero)) {
-                        Labirinto.Imprimir(win);
+                        try {
+                            Labirinto.Imprimir(win);
+                        } catch (FileNotFoundException exception) {
+                            System.out.println("Erro de Leitura de Ficheiro - win");
+                        }
                     } else {
-                        Labirinto.Imprimir(loose);
+                        try {
+                            Labirinto.Imprimir(loose);
+                        } catch (FileNotFoundException exception) {
+                            System.out.println("Erro de Leitura de Ficheiro - win");
+                        }
                     }
 
                 }

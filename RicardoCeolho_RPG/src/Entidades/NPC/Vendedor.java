@@ -14,13 +14,19 @@ import java.util.ArrayList;
 public class Vendedor {
     private ArrayList<ItensHeroi> item;
 
+    /**
+     *Metodo Construtor do Nosso Vendedor
+     * @param item -> Os itens que o nosso vendedor recebe para vender
+     */
     public Vendedor(ArrayList<ItensHeroi> item) {
         this.item = item;
     }
 
+    /**
+     * Metodo para exibir os itens que o nosso vendedor tem
+     */
     public void exibirInventario() {
         int count = 1;
-
         for (ItensHeroi item : this.item) {
             System.out.print(count + " - Item ");
             item.exibirDetalhes();

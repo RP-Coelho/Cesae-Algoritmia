@@ -1,19 +1,12 @@
 package Instanciar;
-
-import Entidades.Heroi.Heroi;
-import Entidades.Heroi.TipoHeroi.Arqueiro;
-import Entidades.Heroi.TipoHeroi.Cavaleiro;
 import Entidades.NPC.Enemy;
 import Entidades.NPC.Vendedor;
 import Enums.TipoHeroi;
 import Itens.Arma;
 import Itens.ItensHeroi;
 import Itens.Pocao;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Listagem {

@@ -3,12 +3,19 @@ package Entidades.NPC;
 import Entidades.Entidade;
 
 public class Enemy extends Entidade {
-
+    /**
+     * Metodo construtor para criar inimigos
+     * @param nome -> Nome do inimigo
+     * @param vida -> Vida do inimigo
+     * @param forca -> Força do inimigo
+     */
     public Enemy(String nome, int vida, int forca) {
         super(nome, vida, forca);
     }
 
-
+    /**
+     * Metodo para exibit os detalhes do nosso inimigo
+     */
     @Override
     public void exibirDetalhes() {
         System.out.print("Nome: "+ this.getNome());

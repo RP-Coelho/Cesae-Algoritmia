@@ -5,14 +5,14 @@ import Entidades.NPC.Enemy;
 import Entidades.NPC.Vendedor;
 import Instanciar.Listagem;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Labirinto {
-    private Scanner input = new Scanner(System.in);
-
+    static Scanner input = new Scanner(System.in);
+    static Console console = System.console();
 
     public Labirinto() {
 
@@ -20,7 +20,7 @@ public class Labirinto {
 
     public boolean labirinto(Heroi hero) throws FileNotFoundException {
         int opcao = 0;
-        String direccao, minotaur = "src/Apoiotxt/minotaur.txt";
+        String direccao, minotaur = "Apoio/minotaur.txt";
 
         System.out.println("Chegaste à entrada do Labirinto");
         VendedorLabirinto(hero);
@@ -40,8 +40,10 @@ public class Labirinto {
         if (Sala(hero, Listagem.MonstrosIniciantes())) {
 
             System.out.println("Parabens passaste a primeira encruzilhada");
-            System.out.print("Carrega em qualquer tecla: ");
-            input.next();
+
+            pressENTER();
+
+
         } else {
 
             return false;
@@ -55,6 +57,9 @@ public class Labirinto {
 
         if (Sala(hero, Listagem.MonstrosIniciantes())) {
             System.out.println("Parabens passaste a segunda encruzilhada");
+
+            pressENTER();
+
         } else {
 
             return false;
@@ -74,12 +79,16 @@ public class Labirinto {
 
                 return false;
             }
+
+            pressENTER();
+
         } else {
             if (Sala(hero, Listagem.MonstrosIniciantes())) {
                 System.out.println("Parabens passaste a terceira encruzilhada");
 
-                System.out.print("Carrega em qualquer tecla: ");
-                input.next();
+
+                pressENTER();
+
 
             } else {
 
@@ -101,8 +110,8 @@ public class Labirinto {
             if (Sala(hero, Listagem.MonstrosIniciantes())) {
                 System.out.println("Parabens! Antes que apareça outra criatura, é melhor seguires em frente");
 
-                System.out.print("Carrega em qualquer tecla: ");
-                input.next();
+
+                pressENTER();
 
                 VendedorLabirinto(hero);
             } else {
@@ -135,14 +144,7 @@ public class Labirinto {
             hero.exibirDetalhes();
             return true;
         } else {
-            try {
 
-
-                String i = "Apoiotxt/Loose.txt";
-                Imprimir(i);
-            } catch (FileNotFoundException exception) {
-                System.out.println("Erro! Ficheiro nao disponivel");
-            }
             return false;
         }
 
@@ -171,7 +173,7 @@ public class Labirinto {
         Vendedor vendedorEntrada = Listagem.vendedorEntrada();
         vendedorEntrada.exibirInventario();
         System.out.print("Deseja fazer alguma compra?");
-
+        System.out.println(" O seu gold actual é: " + hero.getOuro());
         do {
             do {
                 System.out.print("Por favor indique o numero do item que deseja ou 0 para sair: ");
@@ -201,7 +203,7 @@ public class Labirinto {
     public static void Imprimir(String i) throws FileNotFoundException {
 
 
-        Scanner print = new Scanner(new File("i"));
+        Scanner print = new Scanner(new File(i));
 
 
         while (print.hasNextLine()) {
@@ -213,7 +215,17 @@ public class Labirinto {
 
     }
 
+    public static void pressENTER() throws NullPointerException {
 
+        try {
+            System.out.print("Carrega no enter para continuar: ");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+        } catch (NullPointerException exception) {
+
+            input.next();
+        }
+    }
 }
 
 
