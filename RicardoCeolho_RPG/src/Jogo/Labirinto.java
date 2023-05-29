@@ -5,9 +5,11 @@ import Entidades.NPC.Enemy;
 import Entidades.NPC.Vendedor;
 import Instanciar.Listagem;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.Console;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Labirinto {
@@ -20,6 +22,7 @@ public class Labirinto {
 
     /**
      * Metodo booleano de labirinto, onde instanciamos e construimos toda a jogabilidade
+     *
      * @param hero -> O nosso heroi
      * @return -> o resultado -> True caso o nosso heroi vença -> False caso seja derrotado em qualquer fase
      * @throws FileNotFoundException -> Excepção para a leitura dos nossos ficheiros
@@ -47,7 +50,7 @@ public class Labirinto {
 
         if (Sala(hero, Listagem.MonstrosIniciantes())) {
 
-            System.out.println("Parabens passaste a primeira encruzilhada");
+            System.out.println("Parabens! Venceste o monstro");
 
             pressENTER();
 
@@ -64,7 +67,7 @@ public class Labirinto {
         } while (!direccao.equals("corredor") && !direccao.equals("escada"));
 
         if (Sala(hero, Listagem.MonstrosIniciantes())) {
-            System.out.println("Parabens passaste a segunda encruzilhada");
+            System.out.println("Parabens! Venceste o monstro");
 
             pressENTER();
 
@@ -90,9 +93,21 @@ public class Labirinto {
 
             pressENTER();
 
+            if (Sala(hero, Listagem.MonstrosIniciantes())) {
+                System.out.println("Parabens! Venceste o monstro");
+
+
+                pressENTER();
+
+
+            } else {
+
+                return false;
+            }
+
         } else {
             if (Sala(hero, Listagem.MonstrosIniciantes())) {
-                System.out.println("Parabens passaste a terceira encruzilhada");
+                System.out.println("Parabens! Venceste o monstro");
 
 
                 pressENTER();
@@ -106,7 +121,7 @@ public class Labirinto {
         }
 
         do {
-            System.out.println("Você desce a escada e se depara com um corredor estreito e húmido. Um cheiro de mofo permeia o ar.");
+            System.out.println("Desces a escada e desparas-te com um corredor estreito e húmido. Um cheiro de mofo permeia o ar.");
             System.out.println("Segues pelo corredor? Sim ou nao?");
             direccao = input.next().toLowerCase();
         } while (!direccao.equals("sim") && !direccao.equals("nao"));
@@ -131,12 +146,38 @@ public class Labirinto {
             VendedorLabirinto(hero);
         }
 
+
+        do {
+            System.out.println("Seguiste em frente no corredor e deparas-te com uma sala com um cofre");
+            System.out.println("Tentas abrir o cofre? Sim ou nao?");
+            direccao = input.next().toLowerCase();
+        } while (!direccao.equals("sim") && !direccao.equals("nao"));
+
+        if (direccao.equals("sim")) {
+
+            do {
+                System.out.println("Tentas abrir imediantamente ou preferes ir com cautela?");
+                System.out.print("Sim ou nao?");
+                direccao = input.next().toLowerCase();
+            } while (!direccao.equals("sim") && !direccao.equals("nao"));
+
+            System.out.println("Saiu uma luz replandescente e sentes um calor enorme, sentes que a tua vida aumenta");
+            hero.setVidaTotal(+10);
+            hero.setVida(+10);
+
+            System.out.println("A sua vida total aumentou para: " + hero.getVidaTotal());
+            System.out.println("A sua vida actual é de: " + hero.getVida());
+
+
+        } else {
+            System.out.println("Decides seguir em frente");
+        }
+
+
         System.out.println(" À medida que te aproxima do coração do labirinto, a escuridão intensifica-se, engolindo a luz que antes iluminava teu caminho. Consegues ouvir alguns sons ensurcedores junto com alguns grunhidos.");
         Imprimir(minotaur);
 
-        if (Sala(hero, Listagem.FinalBoss())) {
-
-        } else {
+        if (!Sala(hero, Listagem.FinalBoss())) {
 
             return false;
         }
@@ -147,7 +188,8 @@ public class Labirinto {
 
     /**
      * Metodo "construtor" da nossa sala, que chama o metodo atacar do heroi contra um inimigo
-     * @param hero -> o nosso heroi
+     *
+     * @param hero    -> o nosso heroi
      * @param inimigo -> o adversario
      * @return -> true caso o heroi vença -> false caso o inimigo vença
      */
@@ -166,6 +208,7 @@ public class Labirinto {
 
     /**
      * Metodo para invocar o vendedor do labirinto, onde procedemos aos passos para a compra( ver itens, escolher itens, comprar varios itens)
+     *
      * @param hero -> O nosso heroi
      */
 
@@ -221,6 +264,7 @@ public class Labirinto {
 
     /**
      * Metodo para imprimir ficheiros
+     *
      * @param i -> o path do ficheiro
      * @throws FileNotFoundException -> caso o ficheiro nao seja encontrado
      */
@@ -241,6 +285,7 @@ public class Labirinto {
 
     /**
      * Metodo apenas para podermos carregar sempre no enter para continuar e aumentar a interactividade com o jogador
+     *
      * @throws NullPointerException -> caso seja chamado em alguma variavel e possa dar erro.
      */
     public static void pressENTER() throws NullPointerException {
