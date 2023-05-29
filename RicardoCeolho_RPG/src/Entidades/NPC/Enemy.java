@@ -14,7 +14,7 @@ public class Enemy extends Entidade {
     }
 
     /**
-     * Metodo para exibit os detalhes do nosso inimigo
+     * Metodo para exibir os detalhes do nosso inimigo
      */
     @Override
     public void exibirDetalhes() {

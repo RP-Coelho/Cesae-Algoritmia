@@ -1,17 +1,25 @@
 package Instanciar;
+
 import Entidades.NPC.Enemy;
 import Entidades.NPC.Vendedor;
 import Enums.TipoHeroi;
 import Itens.Arma;
 import Itens.ItensHeroi;
 import Itens.Pocao;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.random.RandomGenerator;
 
 public class Listagem {
 
-
+    /**
+     * Metodo para instanciar as armas e o meu ArrayList de armas para passar ao vendedor
+     *
+     * @return o ArrayList de armas
+     */
     public static ArrayList<Arma> ListaArmas() {
 
         ArrayList<Arma> listaArmas = new ArrayList<>();
@@ -89,6 +97,11 @@ public class Listagem {
         return listaArmas;
     }
 
+    /**
+     * Metodo para instanciar as minhas poções e e ArrayList de poçãos para o vendedor
+     *
+     * @return ArrayList de poções
+     */
     public static ArrayList<Pocao> ListaPocao() {
 
         ArrayList<Pocao> listaPocao = new ArrayList<>();
@@ -117,17 +130,27 @@ public class Listagem {
         return listaPocao;
     }
 
+    /**
+     * Crio o arrayList de Itens heroi e passo-lhes os metodos para adicionar os arraylist de armas e poções.
+     *
+     * @return uma ArrayList de Itens Heroi
+     */
     public static ArrayList<ItensHeroi> ListaVendedor() {
 
         ArrayList<ItensHeroi> listaVendedor = new ArrayList<>();
         listaVendedor.addAll(ListaPocao());
         listaVendedor.addAll(ListaArmas());
-        Collections.shuffle(listaVendedor);
+
 
         return listaVendedor;
 
     }
 
+    /**
+     * Metodo para criar as minhas poções iniciais para o  heroi
+     *
+     * @return ArrayList de begginer
+     */
     public static ArrayList<Pocao> PocaoBegginner() {
 
         ArrayList<Pocao> begginerPocao = new ArrayList<>();
@@ -143,6 +166,12 @@ public class Listagem {
         return begginerPocao;
     }
 
+    /**
+     * para criar adicionar a amr iniciaç para o heroi
+     *
+     * @param heroi -> Tipo heroi para adicionar a arma correspondente
+     * @return -> A arma correspondente
+     */
     public static Arma ArmaBegginner(TipoHeroi heroi) {
 
         ArrayList<Arma> beginnerWeapon = new ArrayList<>();
@@ -173,6 +202,11 @@ public class Listagem {
 
     }
 
+    /**
+     * Metodo para criar um ArrayList de inimigos
+     *
+     * @return um inimigo à sorte da nossa Lista
+     */
     public static Enemy MonstrosIniciantes() {
 
         ArrayList<Enemy> inimigosIniciantes = new ArrayList<>();
@@ -184,6 +218,9 @@ public class Listagem {
         Enemy warlock = new Enemy("Dark warlock", 60, 20);
         Enemy spider = new Enemy("Eight-legged wolf Spider", 120, 15);
         Enemy ghost = new Enemy("Ghost Abomynation", 180, 8);
+        Enemy undead = new Enemy("Undead skeleton mage", 100, 15);
+        Enemy orc = new Enemy("Warrior Champion Orc", 150, 12);
+
 
         inimigosIniciantes.add(kobold);
         inimigosIniciantes.add(murlock);
@@ -195,25 +232,34 @@ public class Listagem {
         inimigosIniciantes.add(kobold);
         inimigosIniciantes.add(murlock);
         inimigosIniciantes.add(bat);
+        inimigosIniciantes.add(undead);
+        inimigosIniciantes.add(orc);
 
 
-        ThreadLocalRandom random = ThreadLocalRandom.current();
+        Random rand1 = new Random();
 
-        int rand = random.nextInt(0, inimigosIniciantes.size());
-
+        int rand = rand1.nextInt(0, inimigosIniciantes.size());
 
         return inimigosIniciantes.get(rand);
 
 
     }
 
-
+    /**
+     * Metodo apenas instaciar e retornar o FinalBoss
+     *
+     * @return o boss Final
+     */
     public static Enemy FinalBoss() {
         return new Enemy("Minotouro do Labirinto", 300, 30);
 
 
     }
 
+    /**
+     * metodo para instanciar e retornar o vendedor com uma lista de size 10 random da nossa lista total (sempre diferente com o metodo shuffle)
+     * @return o Vendedor para colocar no labirinto
+     */
     public static Vendedor vendedorEntrada() {
 
         ArrayList<ItensHeroi> vendedor = ListaVendedor();
@@ -221,9 +267,9 @@ public class Listagem {
 
         int subListSize = 10;
 
-        ThreadLocalRandom random = ThreadLocalRandom.current();
+        Random rand1 = new Random();
 
-        int rand = random.nextInt(0, (vendedor.size() - subListSize));
+        int rand = rand1.nextInt(0, (vendedor.size() - subListSize));
 
 
         ArrayList<ItensHeroi> lista = new ArrayList<>(vendedor.subList(rand, (rand + subListSize)));

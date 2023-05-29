@@ -18,6 +18,12 @@ public class Labirinto {
 
     }
 
+    /**
+     * Metodo booleano de labirinto, onde instanciamos e construimos toda a jogabilidade
+     * @param hero -> O nosso heroi
+     * @return -> o resultado -> True caso o nosso heroi vença -> False caso seja derrotado em qualquer fase
+     * @throws FileNotFoundException -> Excepção para a leitura dos nossos ficheiros
+     */
     public boolean labirinto(Heroi hero) throws FileNotFoundException {
         int opcao = 0;
         String direccao, minotaur = "Apoio/minotaur.txt";
@@ -27,6 +33,8 @@ public class Labirinto {
 
 
         System.out.println("\nEntras no labirinto e imediatamente és envolvido por um ar húmido e denso. Paredes de pedra cinzenta se erguem ao teu redor, revelando antigas inscrições enigmáticas. \nA fraca luz que penetra pelas estreitas passagens lança sombras dançantes. Cada corredor parece idêntico ao próximo, desafiando a tua orientação. \nO silêncio é interrompido apenas pelo eco distante dos teus próprios passos e pelos sussurros misteriosos que parecem surgir das profundezas do labirinto. \nCada decisão que tomas pode ser crucial, mas cuidado, pois o labirinto guarda segredos perigosos que podem desviar até mesmo os mais corajosos aventureiros do seu objetivo.");
+
+
         do {
 
 
@@ -137,7 +145,13 @@ public class Labirinto {
         return true;
     }
 
-    public boolean Sala(Heroi hero, Enemy inimigo) throws FileNotFoundException {
+    /**
+     * Metodo "construtor" da nossa sala, que chama o metodo atacar do heroi contra um inimigo
+     * @param hero -> o nosso heroi
+     * @param inimigo -> o adversario
+     * @return -> true caso o heroi vença -> false caso o inimigo vença
+     */
+    public boolean Sala(Heroi hero, Enemy inimigo) {
 
         if (hero.atacar(inimigo).equals(hero)) {
             hero.subirNivel();
@@ -149,6 +163,11 @@ public class Labirinto {
         }
 
     }
+
+    /**
+     * Metodo para invocar o vendedor do labirinto, onde procedemos aos passos para a compra( ver itens, escolher itens, comprar varios itens)
+     * @param hero -> O nosso heroi
+     */
 
     public void VendedorLabirinto(Heroi hero) {
 
@@ -200,6 +219,11 @@ public class Labirinto {
 
     }
 
+    /**
+     * Metodo para imprimir ficheiros
+     * @param i -> o path do ficheiro
+     * @throws FileNotFoundException -> caso o ficheiro nao seja encontrado
+     */
     public static void Imprimir(String i) throws FileNotFoundException {
 
 
@@ -212,9 +236,13 @@ public class Labirinto {
 
         }
 
-
+        print.close();
     }
 
+    /**
+     * Metodo apenas para podermos carregar sempre no enter para continuar e aumentar a interactividade com o jogador
+     * @throws NullPointerException -> caso seja chamado em alguma variavel e possa dar erro.
+     */
     public static void pressENTER() throws NullPointerException {
 
         try {
