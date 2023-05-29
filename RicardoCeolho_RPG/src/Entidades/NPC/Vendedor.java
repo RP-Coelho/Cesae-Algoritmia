@@ -36,10 +36,20 @@ public class Vendedor {
 
     }
 
+    /**
+     *Metodo para buscar o array do vendedor
+     * @return o array com os itens atuais do vendedor
+     */
     public ArrayList<ItensHeroi> getItem() {
         return item;
     }
 
+    /**
+     * Metodo para verificar se o heroi tem dinheiro suficiente para comprar o item
+     * @param i -> O indice do item no nosso array
+     * @param hero -> passa para podermos aceder ao valor do gold que ele tem
+     * @return a resposta se tem ou nao suficiente
+     */
     public boolean hasGold(int i, Heroi hero) {
         if (this.item.get(i).getCusto() < hero.getOuro()) {
             return true;
